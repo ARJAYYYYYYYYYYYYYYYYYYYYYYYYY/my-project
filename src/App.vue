@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <!-- Conditionally render the Navbar only if not on the login page -->
+    <Navbar v-if="!isLoginPage" />
+
+    <!-- Render the current route's component here -->
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// Import Navbar component
+import Navbar from './components/NavbarSide.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Navbar
+  },
+  computed: {
+    // Check if the current route is the login page
+    isLoginPage() {
+      return this.$route.path === '/UserLogin'; // Adjust route name if necessary
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* Add global styles here */
 </style>
